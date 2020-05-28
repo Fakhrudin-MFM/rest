@@ -12,11 +12,13 @@ const pre = require('./prehandle');
 const extendDi = require('core/extendModuleDi');
 const alias = require('core/scope-alias');
 const errorSetup = require('core/error-setup');
+const i18nSetup = require('core/i18n-setup');
 const Service = require('./lib/interfaces/Service');
 
 const lang = config.lang || rootConfig.lang || 'ru';
 const i18nDir = path.join(__dirname, 'i18n');
 errorSetup(lang, i18nDir);
+i18nSetup(lang, config.i18n || i18nDir, moduleName);
 
 const app = express();
 

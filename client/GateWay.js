@@ -7,6 +7,7 @@ const sys = require('core/system');
 const {readYaml} = require('core/util/read');
 const base64 = require('base64-js');
 const IonError = require('core/IonError');
+const __ = require('core/strings').unprefix('errors');
 
 /**
  * @param {{}} options
@@ -82,9 +83,9 @@ function GateWay(options) {
         });
       }))
       .catch((err) => {
-        options.log && options.log.error(`failed to obtain authorization token from ${destHost + options.tokenPath}`);
+        options.log && options.log.error(__('failed to obtain authorization token from %host', {host: destHost + options.tokenPath}));
         options.log && options.log.error(err);
-        res.status(500).send('internal server error');
+        res.status(500).send(__('internal server error'));
       });
   }
 
